@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juang.colecciones;
+package juang.utils;
 
 /**
  *
  * @author juang
- * @param <T>
  */
-public interface Iterable<T> {
+public abstract class Funcion {
 
-    public Iterador<T> iterador();
+    public abstract void ejecutar();
 
 }

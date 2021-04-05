@@ -71,8 +71,7 @@ abstract class Coleccion<T> implements Iterable<T> {
     public T[] toArray() {
         Integer tamaño = tamaño();
         if (tamaño == 0) {
-            //Manda la coletera esa
-            return null;
+            throw new IllegalStateException();
         }
 
         Iterador iterador = iterador();

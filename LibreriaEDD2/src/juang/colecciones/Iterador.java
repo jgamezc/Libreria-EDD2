@@ -5,6 +5,8 @@
  */
 package juang.colecciones;
 
+import juang.utils.Funcion;
+
 /**
  *
  * @author juang
@@ -17,4 +19,5 @@ public abstract class Iterador<T> {
 
     public void remover() {
     }
+
 }

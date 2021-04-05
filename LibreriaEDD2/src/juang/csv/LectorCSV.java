@@ -111,11 +111,10 @@ public class LectorCSV<T> {
      * Las linas (sin incluir los encabezados de las columnas) del archivo.
      */
     public final Lista<String> lineas;
+
     /**
      * Lista de objetos generados por el lector csv.
      */
-    private Lista<T> objetos;
-
     /**
      * Crea u n nuevo lector csv para un archivo en específico, los datos de
      * este son guardados en una {@code List<String>} para luego ser procesados
@@ -128,7 +127,6 @@ public class LectorCSV<T> {
     public LectorCSV(String ruta, Class<T> claseSimbolica) {
 
         lineas = new Lista();
-        objetos = new Lista();
 
         try {
             InputStreamReader sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
@@ -141,8 +139,6 @@ public class LectorCSV<T> {
                 lineas.agregar(linea);
             }
 
-            generarObjetos();
-
         } catch (IOException ex) {
             Logger.getLogger(LectorCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,15 +149,12 @@ public class LectorCSV<T> {
         return objetoCSV.crearObjeto(cadena);
     }
 
-    private void generarObjetos() {
+    public Lista<T> getObjetos() {
 
+        Lista<T> objetos = new Lista<>();
         for (Iterador<String> iterador = lineas.iterador(); iterador.tieneSiguiente();) {
             objetos.agregar(objetoCSV.crearObjeto(iterador.siguiente()));
         }
-    }
-
-    public Lista<T> getObjetos() {
-
         return objetos;
     }
 }
