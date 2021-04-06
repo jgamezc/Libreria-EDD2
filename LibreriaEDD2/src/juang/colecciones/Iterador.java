@@ -15,7 +15,23 @@ public abstract class Iterador<T> {
 
     public abstract boolean tieneSiguiente();
 
+    public abstract Nodo<T> siguienteNodo();
+
+    public Nodo<T> siguienteNodo(int indice) {
+        for (int i = 0; i < indice; i++) {
+            siguienteNodo();
+        }
+        return siguienteNodo();
+    }
+
     public abstract T siguiente();
+
+    public T siguiente(int indice) {
+        for (int i = 0; i < indice; i++) {
+            siguiente();
+        }
+        return siguiente();
+    }
 
     public void remover() {
     }

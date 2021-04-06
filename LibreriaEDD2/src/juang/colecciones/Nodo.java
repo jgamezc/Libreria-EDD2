@@ -9,16 +9,12 @@ package juang.colecciones;
  *
  * @author juang
  */
-class Nodo<T> {
+public class Nodo<T> {
 
-    private final T dato;
+    public T dato;
 
     public Nodo(T dato) {
         this.dato = dato;
-    }
-
-    public T getDato() {
-        return dato;
     }
 
 }

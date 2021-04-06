@@ -85,7 +85,7 @@ public class LectorCSV<T> {
         public T crearObjeto(String cadena) {
 
             try {
-                String[] campos = StringUtil.separar(cadena, ',').toArray();
+                String[] campos = StringUtil.separar(cadena, ';').toArray();
                 int tamaño = campos.length;
                 Object[] argumentos = new Object[campos.length];
 
@@ -103,17 +103,15 @@ public class LectorCSV<T> {
         }
     }
 
+    private final String ruta;
+    private final Class<T> claseSimbolica;
     /**
      * El objeto plantilla para los objetos creados a partir de esta clase.
      */
     private ObjetoCSV<T> objetoCSV;
-    /**
-     * Las linas (sin incluir los encabezados de las columnas) del archivo.
-     */
-    public final Lista<String> lineas;
 
     /**
-     * Lista de objetos generados por el lector csv.
+     * Las linas (sin incluir los encabezados de las columnas) del archivo.
      */
     /**
      * Crea u n nuevo lector csv para un archivo en específico, los datos de
@@ -121,27 +119,12 @@ public class LectorCSV<T> {
      * por el lector a conveniencia.
      *
      * @param ruta la ruta en disco donde se encuentra claseSimbolica archivo.
-     * @param claseSymbolica clase simbólica representativa del objeto que
+     * @param claseSimbolica clase simbólica representativa del objeto que
      * define el archivo csv.
      */
     public LectorCSV(String ruta, Class<T> claseSimbolica) {
-
-        lineas = new Lista();
-
-        try {
-            InputStreamReader sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
-            BufferedReader br = new BufferedReader(sr);
-            String linea = br.readLine();
-            String[] parametros = StringUtil.separar(linea, ',').toArray();
-            objetoCSV = new ObjetoCSV(claseSimbolica, parametros);
-
-            while ((linea = br.readLine()) != null) {
-                lineas.agregar(linea);
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(LectorCSV.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.ruta = ruta;
+        this.claseSimbolica = claseSimbolica;
     }
 
     public T crearObjeto(String cadena) {
@@ -151,10 +134,24 @@ public class LectorCSV<T> {
 
     public Lista<T> getObjetos() {
 
-        Lista<T> objetos = new Lista<>();
-        for (Iterador<String> iterador = lineas.iterador(); iterador.tieneSiguiente();) {
-            objetos.agregar(objetoCSV.crearObjeto(iterador.siguiente()));
+        try {
+            InputStreamReader sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
+            BufferedReader br = new BufferedReader(sr);
+
+            String linea = br.readLine();
+
+            String[] parametros = StringUtil.separar(linea, ';').toArray();
+            objetoCSV = new ObjetoCSV(claseSimbolica, parametros);
+
+            Lista<T> objetos = new Lista<>();
+            while ((linea = br.readLine()) != null) {
+                objetos.agregar(objetoCSV.crearObjeto(linea));
+            }
+
+            return objetos;
+        } catch (IOException ex) {
+            Logger.getLogger(LectorCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return objetos;
+        return null;
     }
 }

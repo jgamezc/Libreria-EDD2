@@ -32,40 +32,42 @@ public abstract class ListaEnlazada<T> extends Coleccion<T> {
         tamaño = 0;
     }
 
-    protected void agregarPrimero(T dato) {
+    protected void agregarInicio(T dato) {
         NodoL nuevoNodo = new NodoL(dato);
         nuevoNodo.siguienteNodo = nodoPuntero.siguienteNodo;
         nodoPuntero.siguienteNodo = nuevoNodo;
         tamaño++;
     }
 
-    protected void agregarUltimo(T dato) {
+    protected void agregarFinal(T dato) {
         NodoL nuevoNodo = new NodoL(dato);
         ultimoNodo.siguienteNodo = nuevoNodo;
         ultimoNodo = nuevoNodo;
         tamaño++;
     }
 
-    protected T get(int indice) {
+    protected T obtener(int indice) {
         if (indice < 0 || indice >= tamaño) {
             throw new IndexOutOfBoundsException();
         }
 
-        Iterador<T> iterador = iterador();
-        int contador = 0;
-        while (iterador.tieneSiguiente() && contador < indice) {
-            iterador.siguiente();
-            contador++;
+        return iterador().siguiente(indice);
+    }
+
+    protected void establecer(int indice, T dato) {
+        if (indice < 0 || indice >= tamaño) {
+            throw new IndexOutOfBoundsException();
         }
-        return iterador.siguiente();
+
+        iterador().siguienteNodo(indice).dato = dato;
     }
 
     protected T primero() {
-        return nodoPuntero.siguienteNodo.getDato();
+        return nodoPuntero.siguienteNodo.dato;
     }
 
     protected T ultimo() {
-        return ultimoNodo.getDato();
+        return ultimoNodo.dato;
     }
 
     protected T siguiente() {
@@ -76,7 +78,7 @@ public abstract class ListaEnlazada<T> extends Coleccion<T> {
             }
             nodoPuntero.siguienteNodo = primerNodo.siguienteNodo;
             tamaño--;
-            return primerNodo.getDato();
+            return primerNodo.dato;
         }
         return null;
     }
@@ -106,10 +108,15 @@ public abstract class ListaEnlazada<T> extends Coleccion<T> {
             }
 
             @Override
-            public T siguiente() {
+            public Nodo<T> siguienteNodo() {
                 nodoAnterior = nodoActual;
                 nodoActual = nodoActual.siguienteNodo;
-                return nodoActual.getDato();
+                return nodoActual;
+            }
+
+            @Override
+            public T siguiente() {
+                return siguienteNodo().dato;
             }
 
             @Override

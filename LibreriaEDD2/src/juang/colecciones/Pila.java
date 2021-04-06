@@ -13,7 +13,7 @@ public class Pila<T> extends ListaEnlazada<T> {
 
     @Override
     public void agregar(T dato) {
-        super.agregarPrimero(dato);
+        super.agregarInicio(dato);
     }
 
     @Override

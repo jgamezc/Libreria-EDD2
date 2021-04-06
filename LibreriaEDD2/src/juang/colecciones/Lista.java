@@ -13,12 +13,17 @@ public class Lista<T> extends ListaEnlazada<T> {
 
     @Override
     public void agregar(T dato) {
-        super.agregarUltimo(dato);
+        super.agregarFinal(dato);
     }
 
     @Override
-    public T get(int indice) {
-        return super.get(indice);
+    public T obtener(int indice) {
+        return super.obtener(indice);
+    }
+
+    @Override
+    public void establecer(int indice, T dato) {
+        super.establecer(indice, dato);
     }
 
     @Override

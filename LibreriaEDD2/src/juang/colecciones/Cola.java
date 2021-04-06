@@ -13,7 +13,7 @@ public class Cola<T> extends ListaEnlazada<T> {
 
     @Override
     public void agregar(T dato) {
-        super.agregarUltimo(dato);
+        super.agregarFinal(dato);
     }
 
     @Override
