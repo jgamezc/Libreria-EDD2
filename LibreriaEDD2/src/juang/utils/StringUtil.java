@@ -42,7 +42,7 @@ public class StringUtil {
             return 0f;
         }
 
-        if (clase == Boolean.class) {
+        if (clase == boolean.class || clase == Boolean.class) {
             if ("true".equals(cadena)) {
                 return true;
             }
