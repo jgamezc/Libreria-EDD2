@@ -14,7 +14,7 @@ import java.lang.reflect.Array;
 abstract class Coleccion<T> implements Iterable<T> {
 
     public abstract void agregar(T dato);
-
+    
     public void remover(T dato) {
         remover(dato, false);
     }

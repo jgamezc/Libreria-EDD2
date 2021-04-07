@@ -44,15 +44,15 @@ public class LectorCSV<T> {
         private boolean[] ignoreList;
 
         /**
-         * Inicializa un nuevo objeto csv representativo de {@code symbClass}.
-         * Se define un constructor para el objeto dependiendo del nombre de sus
-         * parametros de entrada y de los campos declarados en la {@code Class}
-         * {@code symbClass}.
+         * Inicializa un nuevo objeto csv representativo de {@code symbClass}.Se define un constructor para el objeto dependiendo del nombre de sus
+ parametros de entrada y de los campos declarados en la {@code Class}
+        {@code symbClass}.
          *
          * @param claseSimbolica la {@code Class} simbólica que representa los
          * objetos que se generen a partir de esta clase.
          * @param parametros los nombres de los parametros del constructor
          * necesarios para inicializar los objetos.
+         * @param ignoreList
          */
         public ObjetoCSV(Class<T> claseSimbolica, String[] parametros, boolean[] ignoreList) {
 
@@ -64,7 +64,6 @@ public class LectorCSV<T> {
 
                 for (int i = 0; i < tamaño; i++) {
                     tipos[i] = claseSimbolica.getDeclaredField(parametros[i]).getType();
-
                 }
 
                 constructor = claseSimbolica.getConstructor(tipos);
@@ -81,13 +80,12 @@ public class LectorCSV<T> {
         /**
          * Instancia un nuevo objeto a partir del {@code String s} y el
          * {@code Constructor} definido para los objetos creados desde esta
-         * clase. El método se encarga de transformar los datos divididos por
-         * ',' en los tipos de datos requeridos por el {@code Constructor}.
+         * clase.El método se encarga de transformar los datos divididos por
+ ',' en los tipos de datos requeridos por el {@code Constructor}.
          *
+         * @param campos
          * @see juang.csv.StringUtil#split
          * @see juang.csv.StringUtil#parseTo
-         * @param cadena linea del documento .csv que representa las variables
-         * del objeto.
          * @return un {@code Object} de la clase {@code symbClass} definida en
          * el constructor.
          * @throws IllegalArgumentException
@@ -118,12 +116,12 @@ public class LectorCSV<T> {
     }
 
     private final char separador;
+    private final String ruta;
 
     /**
      * El objeto plantilla para los objetos creados a partir de esta clase.
      */
     private ObjetoCSV<T> objetoCSV;
-    private InputStreamReader sr;
 
     /**
      * Crea u n nuevo lector csv para un archivo en específico, los datos de
@@ -137,8 +135,9 @@ public class LectorCSV<T> {
      */
     public LectorCSV(String ruta, Class<T> claseSimbolica, char separador) {
         this.separador = separador;
+        this.ruta = ruta;
         System.out.println("[LectorCSV] clase simbólica: " + claseSimbolica.getName());
-        sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
+        InputStreamReader sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
         try {
             Lista<String> parametros = StringUtil.separar(new BufferedReader(sr).readLine(), separador);
             boolean[] ignoreList = getIgnoreList(parametros);
@@ -187,8 +186,9 @@ public class LectorCSV<T> {
         try {
             long startTime = System.nanoTime();
 
+            InputStreamReader sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
             BufferedReader br = new BufferedReader(sr);
-            br.readLine();
+            System.out.println(br.readLine());
             String linea;
 
             Lista<T> objetos = new Lista<>();

@@ -19,7 +19,7 @@ public abstract class ListaEnlazada<T> extends Coleccion<T> {
             super(dato);
             siguienteNodo = null;
         }
-
+        
     }
 
     protected NodoL<T> nodoPuntero;

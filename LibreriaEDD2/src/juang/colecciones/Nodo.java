@@ -9,12 +9,12 @@ package juang.colecciones;
  *
  * @author juang
  */
-public class Nodo<T> {
+public abstract class Nodo<T> {
 
     public T dato;
 
     public Nodo(T dato) {
         this.dato = dato;
     }
-
+    
 }
