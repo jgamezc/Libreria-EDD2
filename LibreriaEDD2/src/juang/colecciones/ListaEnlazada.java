@@ -31,6 +31,8 @@ public abstract class ListaEnlazada<T> extends Coleccion<T> {
         ultimoNodo = nodoPuntero;
         tamaño = 0;
     }
+    
+    public abstract void agregar(T dato);
 
     protected void agregarInicio(T dato) {
         NodoL nuevoNodo = new NodoL(dato);

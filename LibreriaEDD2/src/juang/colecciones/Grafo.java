@@ -39,7 +39,6 @@ public class Grafo<T> extends Coleccion<Grafo<T>>{
         return null;
     }
 
-    @Override
     public void agregar(Grafo<T> dato) {
         subgrafos.agregar(dato);
     }

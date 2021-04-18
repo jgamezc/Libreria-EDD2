@@ -188,7 +188,7 @@ public class LectorCSV<T> {
 
             InputStreamReader sr = new InputStreamReader(getClass().getResourceAsStream(ruta));
             BufferedReader br = new BufferedReader(sr);
-            System.out.println(br.readLine());
+            br.readLine();
             String linea;
 
             Lista<T> objetos = new Lista<>();
