@@ -9,26 +9,26 @@ package juang.colecciones;
  *
  * @author juang
  */
-public class Grafo<T> extends Coleccion<Grafo<T>>{
+public class Grafo<T> extends Coleccion<Grafo>{
     
     public T dato;
-    private Lista<Grafo<T>> subgrafos;
+    public Lista<Grafo> subgrafos;
     
     public Grafo(T dato){
         this.dato = dato;
         subgrafos = new Lista();
     }
     
-    public Grafo<T> obtenerSubgrafo(int indice){
+    public Grafo obtenerSubgrafo(int indice){
         if (indice < 0 || indice >= subgrafos.tamaño) {
             throw new IndexOutOfBoundsException();
         }
         return iterador().siguiente(indice);
     }
     
-    public Grafo<T> obtenerSubGrafo(T dato)
+    public Grafo obtenerSubGrafo(Object dato)
     {
-        Iterador<Grafo<T>> iterador = subgrafos.iterador();
+        Iterador<Grafo> iterador = subgrafos.iterador();
         while(iterador.tieneSiguiente())
         {
             Grafo subGrafo = iterador.siguiente();
@@ -39,12 +39,12 @@ public class Grafo<T> extends Coleccion<Grafo<T>>{
         return null;
     }
 
-    public void agregar(Grafo<T> dato) {
+    public void agregar(Grafo dato) {
         subgrafos.agregar(dato);
     }
 
     @Override
-    public Iterador<Grafo<T>> iterador() {
+    public Iterador<Grafo> iterador() {
         return subgrafos.iterador();
     }
     
