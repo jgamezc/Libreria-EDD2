@@ -5,18 +5,16 @@
  */
 package juang.colecciones;
 
-import java.util.Iterator;
-
 /**
  *
  * @author juang
  */
-public class Vertex extends Collection<Vertex> {
+public class Vertex<T> {
 
-    public Object value;
-    private List<Vertex> neighbors;
+    public T value;
+    private final List<Vertex> neighbors;
 
-    public Vertex(Object value) {
+    public Vertex(T value) {
         this.value = value;
         neighbors = new List();
     }
@@ -36,11 +34,6 @@ public class Vertex extends Collection<Vertex> {
             }
         }
         return null;
-    }
-
-    @Override
-    public Iterator<Vertex> iterator() {
-        return (Iterator<Vertex>) neighbors.iterator();
     }
 
 }
