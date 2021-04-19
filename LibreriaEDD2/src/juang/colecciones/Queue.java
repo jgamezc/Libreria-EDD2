@@ -9,20 +9,21 @@ package juang.colecciones;
  *
  * @author juang
  */
-public class Pila<T> extends ListaEnlazada<T> {
+public class Queue<T> extends LinkedList<T> {
 
     @Override
-    public void agregar(T dato) {
-        super.agregarInicio(dato);
+    public void add(T dato) {
+        super.addLast(dato);
     }
 
     @Override
-    public T primero() {
-        return super.primero();
+    public T first() {
+        return super.first();
     }
 
     @Override
-    public T siguiente() {
-        return super.siguiente();
+    public T poll() {
+        return super.poll();
     }
+
 }
